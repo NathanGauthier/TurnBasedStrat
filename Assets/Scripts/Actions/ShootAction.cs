@@ -95,7 +95,8 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-        targetUnit.Damage();
+		int damageAmount = 40;
+        targetUnit.TakeDamage(damageAmount);
         OnShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
@@ -148,7 +149,6 @@ public class ShootAction : BaseAction
                 }
 
                 validGridPositionList.Add(testGridPosition);
-                //Debug.Log(testGridPosition);
             }
         }
 
@@ -157,8 +157,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
-
         targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
 
         state = State.Aiming;
@@ -167,7 +165,18 @@ public class ShootAction : BaseAction
 
         canShoot = true;
 
+        ActionStart(onActionComplete);
     }
+
+	public Unit GetTargetUnit()
+	{
+		return targetUnit;
+	}
+
+	public int GetMaxShootDistance()
+	{
+		return maxShootDistance;
+	}
 }
 
     

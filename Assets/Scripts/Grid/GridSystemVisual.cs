@@ -65,11 +65,15 @@ public class GridSystemVisual : MonoBehaviour
 
 	public void HideAllGridPosition()
 	{
-		foreach(GridSystemVisualSingle gridSystemVisualSingle in gridSystemVisualSingleArray)
+		for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
 		{
-			gridSystemVisualSingle.Hide();
+			for (int z = 0; z < LevelGrid.Instance.GetHeight(); z++)
+			{
+				gridSystemVisualSingleArray[x, z].Hide();
+			}
 		}
 	}
+
 
 
 	private void ShowGridPositionRange(GridPosition gridPosition, int range, GridVisualType gridVisualType)
